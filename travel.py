@@ -65,12 +65,13 @@ def sumDistancia(listaaux):
             suma = suma + distancia(listaaux[i],listaaux[i+1])
     return suma
 
-def fitness(x):
-    for i in population:
-        listaaux = []
-        for j in i:
-            listaaux.append(clave.get(j))
-        sumDistancia(listaaux)
+
+def fitness(recorrido):
+    listaaux = []
+    for j in recorrido:
+        listaaux.append(clave.get(j))
+    sumDistancia(listaaux)
+    return sumDistancia(listaaux)
 
 clave = dict(zip(range(len(ciudades)),ciudades))
 population = [genetica() for i in range(pop_size)]
@@ -79,8 +80,20 @@ population = [genetica() for i in range(pop_size)]
 # Select
 
 population = sorted(population, key=fitness)
+print(population)
 best = population[0]
 best_fit = fitness(best)
+
+#Cross 
+
+for i in population:
+    if random.random > 0.8:
+        
+        
+
+        
+
+
 
 
 
