@@ -80,18 +80,76 @@ population = [genetica() for i in range(pop_size)]
 # Select
 
 population = sorted(population, key=fitness)
-print(population)
 best = population[0]
 best_fit = fitness(best)
+print(best, best_fit)
 
-#Cross 
 
-for i in population:
-    if random.random > 0.8:
-        
-        
+generation = 0
 
+while True:
+
+    generation += 1
+
+    if generation >= 50:
+
+        break
+#Cross
+
+    for i in range(len(population)):
+            
+        if random.random() > 0.10 and i < len(population)-1:
+                
+
+            parent1 = population[i]
+            parent2 = population[i+1]
+
+            child = parent1[0:5]
+            penitencia = "No valor"
+            aux = 0
+            for a in range(len(parent1)):
+                if aux >= 5:
+                    aux = aux + 1
+                    if parent2[a] in child[0:a]:
+                        if parent1[a] in child[0:a]:
+                            child.append(penitencia)
+                        else:
+                            child.append(parent1[a])
+                    else:
+                        child.append(parent2[a])
+                else:
+                    aux = aux + 1
         
+            for k in list(range(9)):
+                if k in child:
+                    pass
+                else:
+                    x = child.index("No valor")
+                    child[x] = k
+            
+            #Mutation
+            
+            if random.random() <= 1:
+                child[4], child[5] = child[5],child[4]
+            
+            population.append(child)
+                
+        
+    population = sorted(population, key=fitness)
+    population = population[:pop_size]
+
+    if fitness(population[0]) < best_fit:
+        best = population[0]
+        best_fit = fitness(best)
+
+        print(generation, best, best_fit)
+
+
+
+            
+            
+
+            
 
 
 
