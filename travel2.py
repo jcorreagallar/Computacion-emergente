@@ -1,7 +1,7 @@
 #Travel salesman problem
 #Datos de entrada: "n" ciudades (datos cartesianos)
 #Ciudades: A(2,4), B(6,2), C(6,6), D(11,6), E(8,8), F(16,13), G(17,5), H(13,10), I(6,11)
-#Combinaciones Parte 1) A-I 
+#Combinaciones Parte 2) D-H
 
 import random
 
@@ -30,25 +30,28 @@ def genetica():
 
     position = list(range(9))
 
-
+   
     aux = 0
 
     adn = list ()
 
     for i in chromosome:
-        if aux == 0:
-            i[0] = 1
+        if aux == 3:
+            i[3] = 1
             aux = aux + 1
-            adn.append(0)
-        elif aux > 0 and aux < len(chromosome)-1:
+            adn.append(3)
+        elif aux != 3 and aux != 7:
             aux = aux + 1
-            check = random.choice(position[1:-1])
+            check = random.choice(position)
+            while check == 3 or check == 7:
+                check = random.choice(position)
             position.pop(position.index(check))
             i[check] = 1
             adn.append(check)
         else:
-            i[-1] = 1
-            adn.append(len(chromosome)-1)
+            aux = aux + 1
+            i[7] = 1
+            adn.append(7)
         #for j in i:
             #print(j, end=" ")
         #print("\n")
